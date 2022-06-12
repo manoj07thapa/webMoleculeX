@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-webmoleculex-dev-124409-authRole",
+      "UnauthRoleArn": "arn:aws:iam::469175017431:role/amplify-webmoleculex-dev-124409-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::469175017431:role/amplify-webmoleculex-dev-124409-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-webmoleculex-dev-124409-deployment",
+      "UnauthRoleName": "amplify-webmoleculex-dev-124409-unauthRole",
+      "StackName": "amplify-webmoleculex-dev-124409",
+      "StackId": "arn:aws:cloudformation:ap-south-1:469175017431:stack/amplify-webmoleculex-dev-124409/298de900-ea1d-11ec-9f47-0233e7730afc",
+      "AmplifyAppId": "d3kteew9i7tcd9"
+    },
+    "categories": {
+      "auth": {
+        "webmoleculex1c255b08": {}
+      }
+    }
+  }
+}
