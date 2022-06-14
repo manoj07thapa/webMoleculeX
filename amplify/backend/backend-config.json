@@ -1,6 +1,6 @@
 {
   "auth": {
-    "webmoleculex1c255b08": {
+    "webmoleculex86c3f64b": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

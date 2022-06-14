@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "webmoleculex1c255b08_identitypool_1c255b08",
+    "identityPoolName": "webmoleculex86c3f64b_identitypool_86c3f64b",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "webmol1c255b08",
-    "userPoolName": "webmoleculex1c255b08_userpool_1c255b08",
+    "resourceNameTruncated": "webmol86c3f64b",
+    "userPoolName": "webmoleculex86c3f64b_userpool_86c3f64b",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,17 +31,17 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "webmol1c255b08_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "webmol86c3f64b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "1c255b08",
-    "resourceName": "webmoleculex1c255b08",
+    "sharedId": "86c3f64b",
+    "resourceName": "webmoleculex86c3f64b",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "defaultSocial",
     "hostedUI": true,
     "usernameAttributes": [
       "email"
     ],
-    "hostedUIDomainName": "webmoleculex1c255b08-1c255b08",
+    "hostedUIDomainName": "webmoleculex86c3f64b-86c3f64b",
     "authProvidersUserPool": [
       "Facebook",
       "Google"
