@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import { Auth } from "aws-amplify";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function SignIn() {
+  const router = useRouter();
+
   const initialValues = {
     email: "",
     password: "",
@@ -17,7 +20,7 @@ function SignIn() {
         username: email,
         password,
       });
-      console.log(user);
+      router.push("/");
     } catch (error) {
       console.log("error signing up:", error);
     }

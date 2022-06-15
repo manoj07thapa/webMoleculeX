@@ -1,10 +1,21 @@
-import React from "react";
+import { useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 
 function forgotPasswordSubmit() {
   const router = useRouter();
+
+  useEffect(() => {
+    async function onAppLoad() {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log(user);
+      if (user) {
+        router.push("/");
+      }
+    }
+    onAppLoad();
+  }, []);
 
   const initialValues = {
     email: "",

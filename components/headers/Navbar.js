@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import {
   BookmarkAltIcon,
@@ -17,6 +17,8 @@ import {
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import Link from "next/link";
+import UserMenu from "../auth/UserMenu";
+import { Auth, Hub } from "aws-amplify";
 
 const solutions = [
   {
@@ -99,7 +101,21 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({}) {
+  const [user, setUser] = useState(false);
+
+  useEffect(() => {
+    Hub.listen("auth", (data) => {
+      const event = data.payload.event;
+
+      if (event === "signIn") {
+        setUser(true);
+      }
+      if (event === "signOut") {
+        setUser(false);
+      }
+    });
+  }, [user]);
   return (
     <Popover className="relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -113,6 +129,9 @@ export default function Navbar() {
                 alt=""
               />
             </a>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -300,18 +319,21 @@ export default function Navbar() {
               )}
             </Popover>
           </Popover.Group>
-          <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <Link href="/auth/signIn">
-              <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                Sign in
-              </a>
-            </Link>
-            <Link href="/auth/signUp">
-              <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                Sign up
-              </a>
-            </Link>
-          </div>
+          {user && <UserMenu />}
+          {!user && (
+            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+              <Link href="/auth/signIn">
+                <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                  Sign in
+                </a>
+              </Link>
+              <Link href="/auth/signUp">
+                <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                  Sign up
+                </a>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 

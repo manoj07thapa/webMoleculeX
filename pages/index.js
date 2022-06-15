@@ -2,20 +2,28 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Auth } from "aws-amplify";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    async function onAppLoad() {
+      const user = await Auth.currentAuthenticatedUser();
+      if (user) {
+        setUser(user);
+      }
+    }
+    onAppLoad();
+  }, []);
   return (
     <div>
       <h1 className="text-2xl text-gray-800 font-bold">
-        Hello from web molecule
+        {user ? (
+          <p>{`Hello ${user.attributes.name}`}</p>
+        ) : (
+          <p>Hello molecule</p>
+        )}
       </h1>
-      <button
-        type="submit"
-        onClick={() => Auth.signOut()}
-        className="border px-4 py-2 bg-rose-600 text-white rounded-sm shadow-sm w-1/3"
-      >
-        SignOut
-      </button>
     </div>
   );
 }
