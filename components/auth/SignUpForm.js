@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
+import { signUpSchema } from "../../validation/auth/signUpSchema";
 
 function SignUpForm() {
   const router = useRouter();
@@ -13,7 +14,7 @@ function SignUpForm() {
   };
 
   const onSubmit = async (values, actions) => {
-    console.log("Values", values);
+    console.log("Actions", actions);
     const { email, password, phoneNumber, fullname } = values;
     try {
       const { user } = await Auth.signUp({
@@ -29,11 +30,18 @@ function SignUpForm() {
       console.log(user);
     } catch (error) {
       console.log("error signing up:", error);
+      if (error) {
+        actions.setFieldError(error.response.data.params.path, error); //toDO: backend validation
+      }
     }
   };
   return (
     <div className="mt-7 max-w-md mx-auto">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={signUpSchema}
+      >
         {({ errors, isSubmitting, values }) => (
           <Form>
             <label htmlFor="fullname w-full">

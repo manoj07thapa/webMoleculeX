@@ -3,6 +3,7 @@ import { Formik, Field, Form } from "formik";
 import { Auth } from "aws-amplify";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { loginSchema } from "../../validation/auth/loginSchema";
 
 function SignIn() {
   const router = useRouter();
@@ -27,7 +28,11 @@ function SignIn() {
   };
   return (
     <div className="mt-7 max-w-md mx-auto">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={loginSchema}
+      >
         {({ errors, isSubmitting, values }) => (
           <Form>
             <label htmlFor="email w-full">

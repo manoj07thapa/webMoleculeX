@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
+import { forgotPasswordSubmitSchema } from "../../validation/auth/forgotPasswordSubmitSchema";
 
 function forgotPasswordSubmit() {
   const router = useRouter();
@@ -38,7 +39,11 @@ function forgotPasswordSubmit() {
   };
   return (
     <div className="mt-7 max-w-md mx-auto">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={forgotPasswordSubmitSchema}
+      >
         {({ errors, isSubmitting, values }) => (
           <Form>
             <label htmlFor="email w-full">
